@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>🎀 送给孟子小涵的20岁 🎀</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='70' text-anchor='middle' fill='%23ff80a5'%3E🎀%3C/text%3E%3C/svg%3E">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #ffeef3;
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", -apple-system, sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .book-container {
+            max-width: 560px;
+            width: 100%;
+            background: rgba(255, 248, 250, 0.92);
+            border-radius: 62px;
+            box-shadow: 0 28px 48px rgba(255, 80, 120, 0.18);
+            overflow: hidden;
+        }
+
+        .page {
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            min-height: 65vh;
+            padding: 2rem 1.2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 242, 245, 0.7);
+            border-radius: 62px;
+            position: relative;
+            animation: fadeSlide 0.35s ease-out;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .global-corner {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            font-size: 0.75rem;
+            background: rgba(255, 228, 240, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 60px;
+            color: #b34b6e;
+            white-space: nowrap;
+            z-index: 20;
+        }
+
+        /* 主标题 - 调小字号保证一整排 */
+        .main-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #bc4e73;
+            text-shadow: 1px 1px 4px rgba(255, 210, 225, 0.6);
+            margin: 0.4rem 0;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+        .sub-text {
+            font-size: 0.9rem;
+            color: #c6668a;
+            background: rgba(255, 250, 240, 0.7);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 80px;
+            margin: 6px 0;
+            white-space: nowrap;
+        }
+
+        .page-content {
+            width: 100%;
+            max-height: 55vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin: 12px 20px 20px;
+        }
+
+        .page-btn {
+            background: #ffc7d6;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            color: #a13b5c;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .page-btn:active { transform: scale(0.96); }
+        .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .reason-list {
+            background: rgba(255, 248, 245, 0.92);
+            border-radius: 48px;
+            padding: 1.2rem 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: #aa5478;
+            text-align: center;
+        }
+
+        .fancy-number {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #cf6085;
+        }
+
+        .heart-icon { font-size: 1.8rem; margin: 6px; }
+        .emoji-deco { font-size: 1.3rem; letter-spacing: 4px; margin: 6px 0; }
+        .report-extra-emoji { font-size: 1.3rem; margin-top: 8px; }
+        .big-emoji { font-size: 1.8rem; }
+        .small-emoji { font-size: 0.9rem; }
+
+        /* 新增：永远爱你专属花体样式 */
+        .love-forever {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #cf6085;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 500px) {
+            .main-title { font-size: 1.2rem; }
+            .sub-text { font-size: 0.75rem; white-space: normal; }
+            .global-corner { font-size: 0.6rem; top: 10px; left: 10px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="book-container" id="app">
+    <div id="pages-wrapper"></div>
+    <div class="nav-buttons">
+        <button class="page-btn" id="prevPageBtn">◀ 上一页</button>
+        <button class="page-btn" id="nextPageBtn">下一页 ▶</button>
+    </div>
+</div>
+
+<script>
+    const BG_MAIN = "https://ftp.mioz.cn/test/2026/05/02/1777732717.JPG";
+    let pages = [];
+
+    // 1. 首页 🌸🎀💖✨
+    pages.push({
+        bgImage: BG_MAIN,
+        renderContent: () => `
+            <div class="main-title"><span class="big-emoji">🌷</span> 你还在我深深浅浅的时光里 <span class="big-emoji">🌷</span></div>
+            <div class="sub-text">✨ 这是一个只属于你的小网站 ✨</div>
+            <button class="page-btn" id="firstSpecialBtn" style="margin-top: 25px;">🎈 点点我吧 🎈</button>
+            <div class="emoji-deco"><span class="big-emoji">🌸</span> <span class="small-emoji">🎀</span> <span class="big-emoji">💖</span> <span class="small-emoji">✨</span> <span class="big-emoji">🍰</span></div>
+        `
+    });
+
+    // 2. 生日快乐页
+    pages.push({
+        bgImage: BG_MAIN,
+        renderContent: () => `
+            <div class="main-title">🎂 生日快乐孟子小涵 🎂</div>
+            <div class="page-content" style="font-size:0.9rem; line-height:1.6; background:rgba(255,240,245,0.8); padding:16px; border-radius:48px; margin:8px 0;">
+                首先，祝你生日快乐。<br><br>
+                其次，祝贺你，祝贺你在短短的一年时间里，一个人也能够拖着大大的行李箱登上回家的列车，勇敢地走进一个又一个陌生的社交圈子里，自信地走上一个又一个讲台展示你的能力，<br>很棒，很勇敢，很漂亮。 🧸💗
+            </div>
+            <div class="emoji-deco"><span class="big-emoji">🎉</span> <span class="small-emoji">🎊</span> <span class="big-emoji">✨</span> <span class="small-emoji">🎂</span> <span class="big-emoji">💐</span></div>
+        `
+    });
+
+    // 3. 年度报告 8页（已修改换行）
+    const annualData = [
+        { big:"📖 我们的年度报告 🧸✨", small:"", emojiAll:"🌸📘🎀💖✨🍰" },
+        { big:"🎉 解锁成就“无话不谈” 🎉", small:"高中毕业之后，我们在穿梭于5个app中交换对世界的理解", emojiAll:"💬📱✨🍬🌸🎀" },
+        { big:"🍜 年度称号：老吃家 🥘🍲", small:"一起吃了我也不知道有多少顿饭", emojiAll:"🍚🍛🍰🥢🍜💖" },
+        { big:"✈️ 最远抵达东北 ❄️⛄", small:"这两年很多地方都留下了我们的足迹", emojiAll:"🚞🗺️🏔️🎒❄️⛄" },
+        { big:"🧋 解锁关键词：有点钱全花在嘴上 🍩", small:"大学以来，我们通过给自己点外卖给对方点外卖，养活了各种奶茶蛋糕店", emojiAll:"🧃🍰🍭💸💗🧋" },
+        { big:"🎤 一起唱歌·逛街·吃饭 🎤 麻将n次 · 羽毛球1次 · 东北温泉1次", small:"这两年，我们有1/4的时间一起度过", custom: true, emojiAll:"🎶🛍️🍛🀄🏸♨️🌸🎤" },
+        { big:"😫 成功解锁新人设<br>“孔乙己+祥林嫂+骆驼祥子” 🐫", small:"上了大学，我们的聊天记录中“好累”，一共出现了58次", emojiAll:"📉😮‍💨📖🍂😫🐫" },
+        { big:"👭 闺闺，我受你一辈子 💞👑", small:"今年是我们认识彼此的第八年", emojiAll:"💗🎀✨🎂👭💞" }
+    ];
+
+    annualData.forEach((item, idx) => {
+        pages.push({
+            bgImage: BG_MAIN,
+            renderContent: () => {
+                if(idx === 0) {
+                    return `<div class="main-title" style="font-size:1.3rem;">${item.big}</div><div class="emoji-deco"><span class="big-emoji">🌸</span> <span class="small-emoji">🎂</span> <span class="big-emoji">📖</span> <span class="small-emoji">✨</span> <span class="big-emoji">🎀</span></div>`;
+                }
+                if(item.custom && idx === 5) {
+                    return `<div class="sub-text" style="font-size:0.8rem; white-space:normal;">✨ ${item.small} ✨</div><div class="main-title" style="font-size:1.1rem; margin:8px 0; white-space:normal;">${item.big}</div><div class="report-extra-emoji"><span class="big-emoji">🎶</span> <span class="small-emoji">🛍️</span> <span class="big-emoji">🍛</span> <span class="small-emoji">🀄</span> <span class="big-emoji">🏸</span> <span class="small-emoji">♨️</span> <span class="big-emoji">🌸</span></div>`;
+                }
+                return `${item.small ? `<div class="sub-text" style="font-size:0.75rem; white-space:normal;">✨ ${item.small} ✨</div>` : ''}<div class="main-title" style="font-size:1.2rem; white-space:normal;">${item.big}</div><div class="report-extra-emoji">${item.emojiAll}</div>`;
+            }
+        });
+    });
+
+    // 4. 关于我们
+    pages.push({
+        bgImage: BG_MAIN,
+        renderContent: () => `
+            <div class="main-title" style="font-size:1.5rem;">✨ 关于我们 ✨</div>
+            <div class="page-content" style="text-align:left; font-size:0.85rem; line-height:1.65; max-height:55vh;">
+                如果要说我们俩是怎么成为好朋友的，我觉得大概有三个阶段吧，初中的时候感觉是比普通同学关系好一点的朋友，高中分班之后由于初中关系的基础，开始了解彼此，进入磨合期，这个过程就是感觉开心又不开心的吧，等我摸索到你的习惯，不喜欢还有喜欢的事之后，我们又近了一点。高中的后半阶段，不管怎样陪伴你度过那段痛苦但美好的日子的人是我，尽管我会惹你生气，但回忆总归是给我赋魅的，从初中到高中，绕了这么一大圈，我还是走进了你的生命里。上了大学就发现遇到一个合拍的朋友其实挺难的，当然也有可以一起聊天，上课的同学，不知道是因为大家都很默契地保持一个相敬如宾的态度，还是和你相比我觉得她们都差了一点什么，所以我总是觉得社交真的好累，表达自己，从搭子到朋友要花费的各种成本太大了，好像没必要。这个时候我总是好想你，所以上了大学之后，感觉和你的关系就步入了一个很安稳的阶段吧，有一首歌歌名叫稳稳的幸福，大概就是这种感觉✅。
+            </div>
+            <div class="emoji-deco"><span class="big-emoji">🌸</span> <span class="small-emoji">💞</span> <span class="big-emoji">🎀</span> <span class="small-emoji">✨</span> <span class="big-emoji">💗</span></div>
+        `
+    });
+
+    // 5. 30个理由
+    const reasonsList = [
+        "很漂亮","还不熟的时候会和我说很多很多自己的事情，感觉自己在一点一点靠近你","会和我说，你是我从小到大为数不多可以说知心话的朋友，很开心，感觉自己有被你需要到，我的存在对你来说是有意义的",
+        "会听我说话，接受我的负面情绪，安慰我","不开心的时候会陪我散步","包容我的敏感和无理取闹，会开导我，给我建议",
+        "很好哄，在我坚持不懈的努力下最终还是会原谅我","会吃醋，很可爱，还是在意我","在外面的时候，会帮我拿衣服，拎包，会照顾我，感觉好踏实",
+        "嘴硬心软，经常顶着一张萌萌的脸说一些很无情的话，没关系，我已经学会只听自己想听的话了","有决策力，在外面只要跟在你后面听你的话就好了，很安心，觉得你好厉害",
+        "有解决问题的能力，会教我处理很多事情","和你在一起的时候可以做自己","给了我嫡长闺的地位，爽爽爽","会给我点好吃的好喝的",
+        "会和我说你们学校的事情，虽然我们不在一个学校，但是好像也参与了这段我不在你身边的时光","很感性，共情能力强，心软软","香香哒香香哒香香哒",
+        "默认了我的又争又抢，胡搅蛮缠，如强盗一般在你的人生里占据一席之地，并对此有点小小得意","像在养小猫，平常不让碰，会炸毛，开心了就来蹭蹭你",
+        "表达自己是一件很疲惫的事情，所以感谢你愿意向我袒露出很多不同的样子，也感谢你愿意感知我的微小情绪","有一次逛街，我和你说我穿这个就会像路边没人要的小孩，你说：我要",
+        "会和我说我们以后去干嘛干嘛吧，感觉自己有在你未来的规划里","会臭屁，夸夸就会开心，好可爱呀","在一些方面是互补的，在一些方面又很像",
+        "很长情","哭的时候眼睛周围红红的，我好心疼","是我最好的饭搭子，逛街搭子，旅游搭子，麻将搭子，还有很多很多搭子",
+        "每次都会很认真的听我讲我圈子里的故事，满足我的分享欲","其实爱你也不需要理由吧，是你就足够了。"
+    ];
+
+    pages.push({
+        bgImage: BG_MAIN,
+        renderContent: () => `
+            <div class="heart-icon"><span class="big-emoji">❤️</span> <span class="small-emoji">🎀</span> <span class="big-emoji">💖</span></div>
+            <div class="main-title" style="font-size:1.3rem;">张玺小瑶很爱孟子小涵的30个理由</div>
+            <div class="page-content" style="background:rgba(255,245,240,0.8); border-radius:48px; padding:16px; margin:10px 0; text-align:left; font-size:0.85rem;">
+                <p>接着写点什么呢🤔</p>
+                <p style="margin-top:8px;">其实高中的时候，在各种契机之下，也给你写了一些小作文或者是手写信，正好在网上看到有人写这个，就给你写这个吧。</p>
+                <p style="margin-top:8px;">诶呀，其实有点肉麻，你记得一个人偷偷看🫣</p>
+            </div>
+            <button class="page-btn" id="startReasonBtn" style="margin: 10px auto;">📖 翻开下一页 · 看30个理由</button>
+        `
+    });
+
+    reasonsList.forEach((reason, idx) => {
+        pages.push({
+            bgImage: BG_MAIN,
+            renderContent: () => `
+                <div class="reason-list">
+                    <div class="fancy-number"><span class="big-emoji">✨</span> ${idx+1} <span class="big-emoji">✨</span></div>
+                    <div style="font-size:0.9rem; margin-top: 10px;">${reason}</div>
+                    <div class="emoji-deco" style="margin-top: 12px;"><span class="big-emoji">🌸</span> <span class="small-emoji">💗</span> <span class="big-emoji">🎀</span></div>
+                </div>
+            `
+        });
+    });
+
+    // 6. 一定要幸福呀
+    pages.push({
+        bgImage: BG_MAIN,
+        renderContent: () => `
+            <div class="main-title">一定要幸福呀 <span class="big-emoji">🌸💖</span></div>
+            <div class="page-content" style="font-size:0.85rem; line-height:1.65; background:rgba(255,250,245,0.8); border-radius:48px; padding:16px;">
+                最后最后，今年要祝你什么呢？<br>
+                祝你平安，祝你幸福，祝你快乐，祝你一切顺利。<br>
+                希望你好，特别简单，也不为了什么，就是希望你好，也希望你对我越来越好。<br>
+                好好吃饭，好好睡觉，要做自己，早日实现财富自由。<br>
+                最后别忘了，你未来的日子我都会这么又争又抢下去的，耶耶耶耶耶耶耶略略略略略略略略，爱你呦😘
+            </div>
+            <div class="emoji-deco"><span class="big-emoji">🎀</span> <span class="small-emoji">✨</span> <span class="big-emoji">🍰</span> <span class="small-emoji">💗</span> <span class="big-emoji">🎂</span></div>
+        `
+    });
+
+    // 7. 张玺小瑶有话说（已修改字体）
+    pages.push({
+        bgImage: BG_MAIN,
+        renderContent: () => `
+            <div class="main-title">张玺小瑶有话说 <span class="big-emoji">🎙️🌸</span></div>
+            <div style="font-size:0.85rem; padding:18px; background: rgba(255,250,250,0.8); border-radius:48px; margin:10px;">
+                在我和各种大模型的不懈努力之下，做出来这个东西，虽然目前还是十分简陋，但是我真的调了很久，所以不管你满不满意你都得说喜欢，因为想起来做这个离你的生日也没有几天了，所以其实很多部分和我一开始想的也不太一样，也许也许我明年会带着孟子小涵2.0版回来🤔也许
+            </div>
+            <div class="heart-icon">💖</div>
+            <div class="love-forever">永远爱你</div>
+            <div class="heart-icon">💖</div>
+        `
+    });
+
+    // 渲染逻辑
+    function buildPageHTML(pageObj) {
+        return `<div class="page" style="background-image: url('${pageObj.bgImage}'); background-size: cover; background-position: center; background-color: rgba(255,242,245,0.7); background-blend-mode: overlay;"><div class="global-corner">🎀 送给孟子小涵的20岁</div>${pageObj.renderContent()}</div>`;
+    }
+
+    let currentIdx = 0;
+    const wrapperDiv = document.getElementById('pages-wrapper');
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+
+    function renderCurrentPage() {
+        if (!wrapperDiv) return;
+        wrapperDiv.innerHTML = buildPageHTML(pages[currentIdx]);
+        document.getElementById('firstSpecialBtn')?.addEventListener('click', () => { if(currentIdx+1 < pages.length) goToPage(currentIdx+1); });
+        document.getElementById('startReasonBtn')?.addEventListener('click', () => { if(currentIdx+1 < pages.length) goToPage(currentIdx+1); });
+        updateButtons();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateButtons() {
+        if(prevBtn) { prevBtn.disabled = currentIdx === 0; prevBtn.style.opacity = currentIdx === 0 ? '0.5' : '1'; }
+        if(nextBtn) { nextBtn.disabled = currentIdx === pages.length-1; nextBtn.style.opacity = currentIdx === pages.length-1 ? '0.5' : '1'; }
+    }
+
+    function goToPage(index) {
+        if(index < 0) index = 0;
+        if(index >= pages.length) index = pages.length-1;
+        if(index === currentIdx) return;
+        currentIdx = index;
+        renderCurrentPage();
+    }
+
+    prevBtn?.addEventListener('click', () => { if(currentIdx-1 >= 0) goToPage(currentIdx-1); });
+    nextBtn?.addEventListener('click', () => { if(currentIdx+1 < pages.length) goToPage(currentIdx+1); });
+    renderCurrentPage();
+</script>
+</body>
+</html>
